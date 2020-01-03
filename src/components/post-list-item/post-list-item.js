@@ -1,28 +1,60 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {onToggleButton} from '../../actions';
 
 import './post-list-item.css';
 
-const PostListItem = () => {
+const PostListItem = ({postsItem, onToggleButton}) => {
+    const {label, important, like, id} = postsItem;
+
+    let className = 'app-list-item d-flex justify-content-between';
+
+    if (important) {
+        className += ' important'
+    }
+
+    if (like) {
+        className += ' like'
+    }
+
     return (
-        <li className="app-list-item d-flex justify-content-between">
-            <span className="app-list-item-label">
-                hello World
+        <div className={className}>
+            <span 
+                className="app-list-item-label"
+                onClick={() => onToggleButton(id, 'like')}>
+                {label}
             </span>
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center buttons">
+                <button
+                    type="button"
+                    className="btn-pencil btn-sm">
+                    <i className="fa fa-pencil"></i>
+                </button>
                 <button 
                     type="button" 
-                    className="btn-star bnt-sm">
+                    className="btn-star btn-sm"
+                    onClick={() => onToggleButton(id, 'important')}>
                     <i className="fa fa-star"></i>
                 </button>
                 <button 
                     type="button" 
-                    className="btn-trash bnt-sm">
+                    className="btn-trash btn-sm">
                     <i className="fa fa-trash-o"></i>
                 </button>
                 <i className="fa fa-heart"></i>
             </div>
-        </li>
+        </div>
     )
 }
 
-export default PostListItem;
+const mapStateToProps = ({posts}) => {
+    return {
+        posts
+    }
+}
+
+const mapDispatchToProps = {
+    onToggleButton
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostListItem);

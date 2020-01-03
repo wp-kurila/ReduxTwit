@@ -14,6 +14,15 @@
     box-shadow: none;
     outline: none;
 }
+.list-group-item:hover .btn-pencil {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.app-list-item .btn-pencil {
+  transition: 0.3s all;
+  transform: translateX(30px);
+  opacity: 0;
+}
 .app-list-item .btn-star {
     color: #FFD700;
 }
@@ -51,4 +60,8 @@
 
 .app-list-item.important .btn-star {
     color: #aeaeae;
+}
+
+.buttons {
+  margin-left: auto;
 }
