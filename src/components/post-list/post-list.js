@@ -35,9 +35,28 @@ class PostList extends Component {
     }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({posts, term, filter}) => {
+
+    const filterPosts = (posts, filter) => {
+        if (filter === 'like') {
+            return posts.filter(post => post.like);
+        } else {
+            return posts
+        }
+    };
+
+    const searchPosts = (posts, term) => {
+        if (term.length === 0) {
+            return posts
+        };
+
+        return posts.filter(post => {
+            return post.label.toLowerCase().indexOf(term.toLowerCase()) > -1
+        });        
+    };
+
     return {
-        postsItems: state.posts
+        postsItems: filterPosts(searchPosts(posts, term), filter)
     }
 }
 

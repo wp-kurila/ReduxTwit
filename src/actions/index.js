@@ -13,8 +13,40 @@ const onToggleButton = (id, info) => {
     };
 };
 
+const onDelete = (id) => {
+    return {
+        type: 'DELETE_POST',
+        payload: id
+    };
+};
+
+const onAdd = (newItem) => {
+    return {
+        type: 'ADD_POST',
+        payload: newItem
+    };
+};
+
+const onUpdateSearch = (term) => {
+    return {
+        type: 'SEARCH_POSTS',
+        payload: term
+    };
+};
+
+const filterPosts = (filter) => {
+    return {
+        type: 'FILTER_POSTS',
+        payload: filter
+    };
+};
+
 
 export {
     postsLoaded,
-    onToggleButton
+    onToggleButton,
+    onDelete,
+    onAdd,
+    onUpdateSearch,
+    filterPosts
 }
