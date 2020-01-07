@@ -48,11 +48,11 @@ const mapStateToProps = ({posts, term, filter}) => {
     const searchPosts = (posts, term) => {
         if (term.length === 0) {
             return posts
-        };
-
-        return posts.filter(post => {
-            return post.label.toLowerCase().indexOf(term.toLowerCase()) > -1
-        });        
+        } else {
+            return posts.filter(post => {
+                return post.label.toLowerCase().indexOf(term.toLowerCase()) > -1
+            });
+        }
     };
 
     return {
