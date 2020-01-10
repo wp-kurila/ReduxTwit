@@ -41,8 +41,8 @@ const reducer = (state = initialState, action) => {
             const newPost = {
                 label: action.payload.label,
                 date: action.payload.date,
-                important: false,
-                like: false,
+                important: action.payload.important,
+                like: action.payload.like,
                 id: action.payload.id
             };
             return {

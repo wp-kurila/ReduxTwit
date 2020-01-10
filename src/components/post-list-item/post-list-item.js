@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {onToggleButton, onDelete} from '../../actions';
+import WithTwitService from '../hoc/';
 
 import './post-list-item.css';
 
-const PostListItem = ({postsItem, onToggleButton, onDelete}) => {
+const PostListItem = ({postsItem, onToggleButton, onDelete, TwitService}) => {
     const {label, important, like, id} = postsItem;
 
     let className = 'app-list-item d-flex justify-content-between';
@@ -39,7 +40,10 @@ const PostListItem = ({postsItem, onToggleButton, onDelete}) => {
                 <button 
                     type="button" 
                     className="btn-trash btn-sm"
-                    onClick={() => onDelete(id)}>
+                    onClick={() => {
+                        onDelete(id);
+                        TwitService.deletePost(id);
+                    }}>
                     <i className="fa fa-trash-o"></i>
                 </button>
                 <i className="fa fa-heart"></i>
@@ -59,4 +63,4 @@ const mapDispatchToProps = {
     onDelete
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostListItem);
+export default WithTwitService()(connect(mapStateToProps, mapDispatchToProps)(PostListItem));

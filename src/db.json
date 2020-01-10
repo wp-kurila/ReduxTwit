@@ -1,25 +1,25 @@
 {
-    "posts": [
-        {
-            "label": "Going to learn React",
-            "date": "2020-01-01T18:25:43.511Z",
-            "important": true,
-            "like": false,
-            "id": 1
-        },
-        {
-            "label": "That is so good",
-            "date": "2012-04-23T18:25:43.511Z",
-            "important": false,
-            "like": false,
-            "id": 2
-        },
-        {
-            "label": "I need a break...",
-            "date": "2012-04-23T18:25:43.511Z",
-            "important": false,
-            "like": false,
-            "id": 3
-        }
-    ]
+  "posts": [
+    {
+      "label": "Going to learn React",
+      "date": "2020-01-01T18:25:43.511Z",
+      "important": true,
+      "like": false,
+      "id": 1
+    },
+    {
+      "label": "That is so good",
+      "date": "2012-04-23T18:25:43.511Z",
+      "important": false,
+      "like": false,
+      "id": 2
+    },
+    {
+      "label": "I need a break...",
+      "date": "2012-04-23T18:25:43.511Z",
+      "important": false,
+      "like": false,
+      "id": 3
+    }
+  ]
 }
