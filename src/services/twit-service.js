@@ -22,13 +22,11 @@ export default class TwitService {
                 'Content-Type': 'application/json'
             }
         })
-        .then(responce => responce.json());
     }
 
     async deletePost(id) {
         await fetch(`${this._apiBase}/posts/${id}`, {
             method: 'DELETE'            
         })
-        .then(responce => responce.json());
     }
 }

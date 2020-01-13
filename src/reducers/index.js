@@ -57,12 +57,23 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 term: action.payload
             };
-            
         case 'FILTER_POSTS':
             return {
                 ...state,
                 filter: action.payload
-            }
+            };
+        case 'EDIT_POST':
+            const idx = state.posts.findIndex(item => item.id === action.payload.id);
+            const oldPost = state.posts[idx];
+            const editPost = {...oldPost, label: action.payload.newLabel};
+            return {
+                ...state,
+                posts: [
+                   ...state.posts.slice(0, idx),
+                   editPost,
+                   ...state.posts.slice(idx + 1)
+                ]
+            };
         default:
             return state;
     }

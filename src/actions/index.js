@@ -41,6 +41,13 @@ const filterPosts = (filter) => {
     };
 };
 
+const editPost = (changedPost) => {
+    return {
+        type: 'EDIT_POST',
+        payload: changedPost
+    };
+};
+
 
 export {
     postsLoaded,
@@ -48,5 +55,6 @@ export {
     onDelete,
     onAdd,
     onUpdateSearch,
-    filterPosts
+    filterPosts,
+    editPost
 }

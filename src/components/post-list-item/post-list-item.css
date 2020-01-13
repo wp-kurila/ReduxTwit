@@ -2,7 +2,7 @@
   font-size: 1.25rem;
 }
 
-.app-list-item button {
+.app-list-item button, .input-block button {
   width: 35px;
   height: 35px;
   margin: 3px;
@@ -64,4 +64,22 @@
 
 .buttons {
   margin-left: auto;
+}
+
+.input-block {
+  display: none;
+  transition: 0.5s all;
+  transform: translate(0px, -40px);
+  width: 100%;
+  
+}
+.input-block .btn-ok {
+  color: green;
+}
+.input-block .btn-close {
+  color: red;
+}
+.active {
+  display: flex;
+  transform: translate(0px, 0px);
 }
