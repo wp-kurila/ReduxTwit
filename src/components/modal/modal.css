@@ -1,0 +1,49 @@
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    /* background: #d0cfcf;
+    opacity: 0.3; */
+}
+
+.modalBlock {
+    position: relative;
+    background: #ffffff;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 200px;
+    border: 1px solid #6c757d;
+    z-index: 9;
+    opacity: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: .25rem;
+}
+
+.modalHeader {
+
+}
+.modalHeader h1 {
+    font-size: 26px;
+}
+
+.modalContent {
+
+}
+.modalContent span {
+    font-size: 1.25rem;
+}
+
+.modalFootet {
+    text-align: end;
+}
+
+.modalFootet button:last-child {
+   margin: 0 0 0 10px;
+}

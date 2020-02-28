@@ -1,12 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {onToggleButton, onDelete, editPost} from '../../actions';
-import WithTwitService from '../hoc/';
-import $ from "jquery";
+import {onToggleButton, onDelete, openModal} from '../../actions';
 
 import './post-list-item.css';
 
-const PostListItem = ({postsItem, onToggleButton, onDelete, TwitService, editPost}) => {
+const PostListItem = ({postsItem, onToggleButton, onDelete, openModal}) => {
     const {label, important, like, id} = postsItem;
 
     let className = 'app-list-item d-flex justify-content-between';
@@ -20,7 +18,6 @@ const PostListItem = ({postsItem, onToggleButton, onDelete, TwitService, editPos
     }
 
     return (
-        <>
         <div className={className}>
             <span 
                 className="app-list-item-label"
@@ -31,7 +28,13 @@ const PostListItem = ({postsItem, onToggleButton, onDelete, TwitService, editPos
                 <button
                     type="button"
                     className="btn-pencil btn-sm"
-                    onClick={(e) => openEditBlock(e.target, label)}>
+                    onClick={() => openModal({
+                        type: 'change',
+                        idPost: id,
+                        header: 'Редактирование поста',
+                        content: label,
+                        buttonSubmit: 'Изменить'
+                    })}>
                     <i className="fa fa-pencil"></i>
                 </button>
                 <button 
@@ -43,57 +46,19 @@ const PostListItem = ({postsItem, onToggleButton, onDelete, TwitService, editPos
                 <button 
                     type="button" 
                     className="btn-trash btn-sm"
-                    onClick={() => {
-                        onDelete(id);
-                        TwitService.deletePost(id);
-                    }}>
+                    onClick={() => openModal({
+                        type: 'delete',
+                        idPost: id,
+                        header: 'Удаление поста',
+                        content: 'Уверены в том чтобы удалить этот пост?',
+                        buttonSubmit: 'Уверен, удаляй!'
+                    })}>
                     <i className="fa fa-trash-o"></i>
                 </button>
                 <i className="fa fa-heart"></i>
             </div>
-        </div>
-        <form 
-            className='input-block'
-            onSubmit={e => changePost(editPost, label, id, e)}>
-            <input 
-                className='form-control'/>
-            <button
-                type='button'
-                className='btn-ok btn-sm'>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                </button>
-            <button
-                type='button'
-                className='btn-close btn-sm'
-                onClick={(e) => closeEditBlock(e.target)}>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                </button>
-        </form>
-        </>
+        </div>        
     )
-}
-
-const openEditBlock = (element, text) => {
-    const editBlock = $(element).parents('.app-list-item').siblings('.input-block');
-    editBlock.addClass('active');
-    editBlock.children('input').val(text);
-}
-
-const closeEditBlock = (element) => {
-    const editBlock = $(element).parents('form');
-    editBlock.removeClass('active');
-}
-
-const changePost = (editPost, label, id, e) => {
-    e.preventDefault();
-    const newLabel = $(e.target).children('input').val();
-    if (newLabel !== label) {
-        editPost({
-            id,
-            newLabel
-        });
-        closeEditBlock($(e.target).children('.btn-close'));
-    }
 }
 
 const mapStateToProps = ({posts}) => {
@@ -105,7 +70,7 @@ const mapStateToProps = ({posts}) => {
 const mapDispatchToProps = {
     onToggleButton,
     onDelete,
-    editPost
+    openModal
 }
 
-export default WithTwitService()(connect(mapStateToProps, mapDispatchToProps)(PostListItem));
+export default connect(mapStateToProps, mapDispatchToProps)(PostListItem);

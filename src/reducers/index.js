@@ -1,7 +1,13 @@
 const initialState = {
     posts: [],
     term: '',
-    filter: 'all'
+    filter: 'all',
+    modalIsOpen: false,
+    typeModal: '',
+    idPost: null,
+    modalHeader: '',
+    modalContent: '',
+    buttonSubmit: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -63,9 +69,9 @@ const reducer = (state = initialState, action) => {
                 filter: action.payload
             };
         case 'EDIT_POST':
-            const idx = state.posts.findIndex(item => item.id === action.payload.id);
+            const idx = state.posts.findIndex(item => item.id === action.payload.idPost);
             const oldPost = state.posts[idx];
-            const editPost = {...oldPost, label: action.payload.newLabel};
+            const editPost = {...oldPost, label: action.payload.newModalContent};
             return {
                 ...state,
                 posts: [
@@ -73,6 +79,22 @@ const reducer = (state = initialState, action) => {
                    editPost,
                    ...state.posts.slice(idx + 1)
                 ]
+            };
+        case 'MODAL_IS_OPEN':
+            const {type, header, content, buttonSubmit, idPost} = action.payload;
+            return {
+                ...state,
+                modalIsOpen: true,
+                typeModal: type,
+                idPost,
+                modalHeader: header,
+                modalContent: content,
+                buttonSubmit
+            };
+        case 'MODAL_IS_CLOSE':
+            return {
+                ...state,
+                modalIsOpen: false
             };
         default:
             return state;

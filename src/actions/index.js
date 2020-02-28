@@ -48,6 +48,19 @@ const editPost = (changedPost) => {
     };
 };
 
+const openModal = (modalData) => {
+    return {
+        type: 'MODAL_IS_OPEN',
+        payload: modalData
+    };
+};
+
+const closeModal = () => {
+    return {
+        type: 'MODAL_IS_CLOSE'
+    };
+};
+
 
 export {
     postsLoaded,
@@ -56,5 +69,7 @@ export {
     onAdd,
     onUpdateSearch,
     filterPosts,
-    editPost
+    editPost,
+    openModal,
+    closeModal
 }
